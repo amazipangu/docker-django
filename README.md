@@ -29,10 +29,36 @@ DATABASES = {
 }
 ```
 
-1. Run the `docker-compose up` command
+1. In `web/app/settings.py`, add the line `STATIC_ROOT = STATIC_ROOT = os.path.join(BASE_DIR, 'static')`
+
+1. Install Admin app.
+  - In `web/app/settings.py`, add line `django.contrib.admin`
+
+  ```python
+  INSTALLED_APPS = [
+      'users.apps.UsersConfig',
+      'django.contrib.admin',
+      'django.contrib.auth',
+      'django.contrib.contenttypes',
+      'django.contrib.sessions',
+      'django.contrib.messages',
+      'django.contrib.staticfiles',
+  ]
+  ```
+
+1. Run the `docker-compose up` command again
+
 ```sh
 docker-compose up
 ```
+1. Initilize your database
 
-## I wanna improve...
-it can't contain static file as js, css, image.
+```sh
+docker-compose run web python manage.py migrate
+```
+
+1. Collecting staticfiles
+
+```sh
+docker-compose run web python manage.py collectstatic --noinput
+```
