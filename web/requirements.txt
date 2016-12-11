@@ -1,2 +1,2 @@
-Django
+Django1.10
 psycopg2
