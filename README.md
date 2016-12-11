@@ -20,7 +20,7 @@
 1. Create the Django project using the docker-compose command.
 
   ```sh
-  docker-compose exec web django-admin.py startproject composeexample .
+  docker-compose exec web django-admin.py startproject yourproject .
   ```
 
 1. In your project directory, edit the composeexample/settings.py file.
