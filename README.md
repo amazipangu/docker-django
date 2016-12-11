@@ -43,12 +43,10 @@
    STATIC_ROOT = STATIC_ROOT = os.path.join(BASE_DIR, 'static')
   ```
 
-
 1. Install Admin app. In `web/app/settings.py`, add line `django.contrib.admin`
 
   ```python
   INSTALLED_APPS = [
-      'users.apps.UsersConfig',
       'django.contrib.admin',
       'django.contrib.auth',
       'django.contrib.contenttypes',
@@ -80,8 +78,9 @@
 
   - Define your model class in `yourapps/models.py`
   - Add line `yourapps.apps.YourappsConfig` in `web/app/settings.py` of `INSTALLED_APPS`
+
     ```python
-    INSTALLED_APPS = [
+      INSTALLED_APPS = [
         'yourapps.apps.YourappsConfig',
         'django.contrib.admin',
         'django.contrib.auth',
