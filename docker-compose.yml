@@ -1,12 +1,12 @@
-version: '2'
+version: '3'
 services:
   web:
    restart: always
    build: ./web
    expose:
      - "8000"
-   links:
-     - postgres:postgres
+   depends_on:
+     - db
    command: gunicorn app.wsgi -b 0.0.0.0:8000
    volumes:
      - ./web:/usr/src/app
@@ -23,7 +23,5 @@ services:
       - web
     links:
       - web:web
-  postgres:
+  db:
    image: postgres
-   ports:
-     - "5432:5432"
