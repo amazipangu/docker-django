@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   web:
    restart: always
@@ -24,4 +24,12 @@ services:
     links:
       - web:web
   db:
-   image: postgres
+   restart: always
+   build: ./postgres
+   ports:
+     - 5432:5432
+   volumes:
+     - ./postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+   environment:
+     - POSTGRES_PASSWORD=postgres
+     - POSTGRES_USER=postgres
