@@ -1,7 +1,13 @@
-FROM python:3.6
+FROM python:3.6-alpine
 ENV PYTHONUNBUFFERED 1
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-ADD requirements.txt /usr/src/app/
-RUN pip install -r requirements.txt
+COPY Pipfile /usr/src/app/
+RUN apk update \
+  && apk add --virtual build-tools gcc python3-dev musl-dev \
+  && apk add postgresql-dev
+RUN pip install pipenv
+RUN pipenv lock
+RUN pipenv install --system --deploy
+RUN apk del build-tools
 ADD . /usr/src/app/

@@ -1,0 +1,16 @@
+[dev-packages]
+flake8 = ">=3.5.0"
+pytest = "*"
+mock = "*"
+pytest-xdist = "*"
+
+[packages]
+django = "<=2.0.0"
+psycopg2 = "*"
+gunicorn = "*"
+
+[scripts]
+# tests = "bash ./run-tests.sh"
+
+[pipenv]
+#allow_prereleases = true

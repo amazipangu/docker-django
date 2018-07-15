@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   web:
    restart: always
@@ -11,6 +11,8 @@ services:
    volumes:
      - ./web:/usr/src/app
      - ./web/static/:/usr/src/app/static
+   env_file:
+     - ./envs/db.env
   nginx:
     restart: always
     image: nginx
@@ -18,11 +20,9 @@ services:
       - "80:80"
     volumes:
       - "./nginx/:/etc/nginx/"
-      - /www/static
-    volumes_from:
+      - /web/static
+    depends_on:
       - web
-    links:
-      - web:web
   db:
    restart: always
    build: ./postgres
@@ -30,6 +30,5 @@ services:
      - 5432:5432
    volumes:
      - ./postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
-   environment:
-     - POSTGRES_PASSWORD=postgres
-     - POSTGRES_USER=postgres
+   env_file:
+     - ./envs/db.env
