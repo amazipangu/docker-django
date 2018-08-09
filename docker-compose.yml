@@ -30,5 +30,9 @@ services:
      - 5432:5432
    volumes:
      - ./postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+     - pgdata:/var/lib/postgresql/data
    env_file:
      - ./envs/db.env
+volumes:
+  pgdata:
+    driver: "local"
