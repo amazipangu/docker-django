@@ -1,0 +1,14 @@
+[dev-packages]
+flake8 = ">=3.5.0"
+pytest = "*"
+mock = "*"
+pytest-xdist = "*"
+
+[packages]
+click = "*"
+
+[scripts]
+# tests = "bash ./run-tests.sh"
+
+[pipenv]
+#allow_prereleases = true
