@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.7-alpine
 ENV PYTHONUNBUFFERED 1
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -8,6 +8,7 @@ RUN apk update \
   && apk add postgresql-dev
 RUN pip install pipenv
 RUN pipenv lock --pre
+RUN pipenv install --system --dev
 RUN pipenv install --system --deploy
 RUN apk del build-tools
 ADD . /usr/src/app/
