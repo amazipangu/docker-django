@@ -33,13 +33,6 @@ services:
      - pgdata:/var/lib/postgresql/data
    env_file:
      - ./envs/db.env
-  cli:
-    build: ./cli
-    depends_on:
-      - web
-    volumes:
-      - ./cli:/usr/src/app
-    command: /bin/sh -c "while true; do echo Running Django CLI Tool Container; sleep 600; done"
 volumes:
   pgdata:
     driver: "local"
