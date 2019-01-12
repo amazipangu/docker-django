@@ -3,15 +3,15 @@
 ## Specification
 
 * WSGI
-  * gunicorn
-* webserver
-    * nginx
-* database
-    * postgres
+  * [Gunicorn](https://gunicorn.org/)
+* HTTP server
+    * [nginx](https://nginx.org/en/)
+* Database
+    * [PostgreSQL](https://www.postgresql.org/)
 
 ## How to use
 
-1. Build your docker environment
+1. Build your Docker environment
 
   ```sh
   docker-compose build
@@ -20,10 +20,10 @@
 1. Create the Django project using the docker-compose command.
 
   ```sh
-  docker-compose exec web django-admin.py startproject yourproject .
+  docker-compose run web django-admin.py startproject yourproject .
   ```
 
-1. In your project directory, edit the composeexample/settings.py file.
+1. In your project directory, edit the yourproject/settings.py file.
 
   ```python
   DATABASES = {
@@ -37,13 +37,13 @@
   }
   ```
 
-1. In `web/app/settings.py`, add the line at the bottom of it.
+1. In `web/yourproject/settings.py`, add the line at the bottom of it.
 
   ```python
    STATIC_ROOT = STATIC_ROOT = os.path.join(BASE_DIR, 'static')
   ```
 
-1. Install Admin app. In `web/app/settings.py`, add line `django.contrib.admin`
+1. Install Admin app. In `web/yourproject/settings.py`, add line `django.contrib.admin`
 
   ```python
   INSTALLED_APPS = [
@@ -59,7 +59,7 @@
 1. Run the `docker-compose up` command again
 
   ```sh
-  docker-compose up
+  sh bin/container_start.sh
   ```
 
 1. Go ahead, create your app!
