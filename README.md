@@ -17,33 +17,34 @@
   docker-compose build
   ```
 
-1. Create the Django project using the docker-compose command.
+2. Create the Django project using the docker-compose command.
 
   ```sh
   docker-compose run web django-admin.py startproject yourproject .
   ```
 
-1. In your project directory, edit the yourproject/settings.py file.
+3. In your project directory, edit the yourproject/settings.py file.
 
   ```python
   DATABASES = {
       'default': {
           'ENGINE': 'django.db.backends.postgresql',
-          'NAME': 'postgres',
-          'USER': 'postgres',
+          'NAME': 'your_db_name',
+          'USER': 'your_db_user',
+          'PASSWORD': 'your_db_password',
           'HOST': 'db',
           'PORT': 5432,
       }
   }
   ```
 
-1. In `web/yourproject/settings.py`, add the line at the bottom of it.
+4. In `web/yourproject/settings.py`, add the line at the bottom of it.
 
   ```python
    STATIC_ROOT = STATIC_ROOT = os.path.join(BASE_DIR, 'static')
   ```
 
-1. Install Admin app. In `web/yourproject/settings.py`, add line `django.contrib.admin`
+5. Install Admin app. In `web/yourproject/settings.py`, add line `django.contrib.admin`
 
   ```python
   INSTALLED_APPS = [
@@ -56,25 +57,25 @@
   ]
   ```
 
-1. Run the `docker-compose up` command again
+6. Run the `docker-compose up` command again
 
   ```sh
   sh bin/container_start.sh
   ```
 
-1. Go ahead, create your app!
+7. Go ahead, create your app!
 
   ```sh
   docker-compose exec web python manage.py startapp yourapp
   ```
 
-1. Initilize your database
+8. Initilize your database
 
   ```sh
   docker-compose exec web python manage.py migrate
   ```
 
-1. Enable `Model`
+9. Enable `Model`
 
   - Define your model class in `yourapps/models.py`
   - Add line `yourapps.apps.YourappsConfig` in `web/app/settings.py` of `INSTALLED_APPS`
@@ -95,13 +96,13 @@
     docker exec web python manage.py makemigrations yourapps
     ```
 
-1. Initilize Django admin
+10. Initilize Django admin
 
   ```sh
   docker-compose exec -it web python manage.py createsuperuser
   ```
 
-1. Collecting staticfiles
+11. Collecting staticfiles
 
   ```sh
   docker-compose run web python manage.py collectstatic --noinput
