@@ -9,8 +9,3 @@ django = "<=3.0"
 psycopg2 = "<=2.8.3:"
 gunicorn = "<=19.9"
 
-[scripts]
-# tests = "bash ./run-tests.sh"
-
-[pipenv]
-#allow_prereleases = true
